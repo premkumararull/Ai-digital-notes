@@ -28,28 +28,35 @@ document.getElementById('saveBtn').addEventListener('click', () => {
 });
 
 document.getElementById('exportBtn').addEventListener('click', () => {
-  const text = document.getElementById('output').value.trim();
-  if (!text) return alert('Nothing to export');
+  try {
+    const text = document.getElementById('output').value.trim();
+    if (!text) return alert('Nothing to export');
+    if (typeof docx === 'undefined') return alert('docx library not loaded');
 
-  const { Document, Packer, Paragraph, TextRun } = docx;
-  const doc = new Document({
-    sections: [{
-      children: text.split('\n').map(line =>
-        new Paragraph({
-          children: [new TextRun({ text: line, font: 'Calibri', size: 24 })]
-        })
-      )
-    }]
-  });
+    const { Document, Packer, Paragraph, TextRun } = docx;
+    const doc = new Document({
+      sections: [{
+        children: text.split('\n').map(line =>
+          new Paragraph({
+            children: [new TextRun({ text: line, font: 'Calibri', size: 24 })]
+          })
+        )
+      }]
+    });
 
-  Packer.toBlob(doc).then(blob => {
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'note.docx';
-    a.click();
-    URL.revokeObjectURL(url);
-  });
+    Packer.toBlob(doc).then(blob => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'note.docx';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }).catch(err => alert('Export failed: ' + err.message));
+  } catch (err) {
+    alert('Error: ' + err.message);
+  }
 });
 
 function renderNotes() {
