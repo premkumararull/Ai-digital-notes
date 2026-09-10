@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Handwritten Notes</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h2>Handwriting to Digital Notes</h2>
+<input type="file" id="imgInput" accept="image/*" capture="environment">
+<div id="preview"></div>
+<button id="scanBtn">Scan</button>
+<p id="status"></p>
+<textarea id="output" rows="10" placeholder="Extracted text..."></textarea>
+<button id="saveBtn">Save Note</button>
+<h3>Saved Notes</h3>
+<ul id="notesList"></ul>
+
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
