@@ -1,34 +1,80 @@
 * { box-sizing: border-box; border-radius: 0 !important; }
 body {
   font-family: "Courier New", monospace;
-  background: #fff;
-  color: #000;
+  background: #0a0a0a;
+  color: #fff;
   max-width: 480px;
   margin: auto;
   padding: 16px;
 }
-h1 { font-size: 22px; text-transform: uppercase; border-bottom: 4px solid #000; padding-bottom: 8px; }
-h2 { font-size: 16px; text-transform: uppercase; margin-top: 24px; border-top: 3px solid #000; padding-top: 8px; }
+h1 {
+  font-size: 24px;
+  text-transform: uppercase;
+  border-bottom: 4px solid #ff2fa3;
+  padding-bottom: 8px;
+  color: #ff2fa3;
+  text-shadow: 0 0 8px #ff2fa3aa;
+  letter-spacing: 2px;
+}
+h2 {
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-top: 24px;
+  border-top: 3px solid #ff2fa3;
+  padding-top: 8px;
+  color: #ff2fa3;
+}
 input, textarea, button {
   width: 100%;
-  border: 3px solid #000;
+  border: 3px solid #ff2fa3;
   padding: 10px;
   margin-top: 10px;
   font-family: inherit;
   font-size: 14px;
-  background: #fff;
+  background: #111;
+  color: #fff;
+  transition: all 0.15s ease;
+}
+textarea:focus, input:focus {
+  outline: none;
+  box-shadow: 0 0 10px #ff2fa3;
 }
 button {
-  background: #000;
-  color: #fff;
+  background: #ff2fa3;
+  color: #000;
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
+  letter-spacing: 1px;
 }
-button:active { background: #444; }
+button:active {
+  background: #fff;
+  box-shadow: 0 0 20px #ff2fa3;
+  transform: scale(0.97);
+}
 .row { display: flex; gap: 8px; }
 .row button { width: 50%; }
-#preview img { width: 100%; margin-top: 10px; border: 3px solid #000; }
-#status { font-weight: bold; }
+#preview img {
+  width: 100%;
+  margin-top: 10px;
+  border: 3px solid #ff2fa3;
+  filter: grayscale(20%) contrast(1.1);
+}
+#status {
+  font-weight: bold;
+  color: #ff2fa3;
+  animation: pulse 1s infinite alternate;
+}
+@keyframes pulse {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
 #notesList { list-style: none; padding: 0; }
-#notesList li { border: 3px solid #000; padding: 8px; margin-top: 8px; font-size: 13px; }
+#notesList li {
+  border: 3px solid #ff2fa3;
+  padding: 8px;
+  margin-top: 8px;
+  font-size: 13px;
+  background: #111;
+}
+#notesList li:hover { box-shadow: 0 0 10px #ff2fa3; }
