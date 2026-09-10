@@ -9,13 +9,13 @@ document.getElementById('imgInput').addEventListener('change', e => {
 document.getElementById('scanBtn').addEventListener('click', () => {
   if (!imgFile) return alert('Pick an image first');
   const status = document.getElementById('status');
-  status.textContent = 'Scanning...';
+  status.textContent = 'SCANNING...';
   Tesseract.recognize(imgFile, 'eng')
     .then(({ data: { text } }) => {
       document.getElementById('output').value = text;
-      status.textContent = 'Done';
+      status.textContent = 'DONE';
     })
-    .catch(err => status.textContent = 'Error: ' + err.message);
+    .catch(err => status.textContent = 'ERROR: ' + err.message);
 });
 
 document.getElementById('saveBtn').addEventListener('click', () => {
@@ -25,6 +25,31 @@ document.getElementById('saveBtn').addEventListener('click', () => {
   notes.push({ text, date: new Date().toLocaleString() });
   localStorage.setItem('notes', JSON.stringify(notes));
   renderNotes();
+});
+
+document.getElementById('exportBtn').addEventListener('click', () => {
+  const text = document.getElementById('output').value.trim();
+  if (!text) return alert('Nothing to export');
+
+  const { Document, Packer, Paragraph, TextRun } = docx;
+  const doc = new Document({
+    sections: [{
+      children: text.split('\n').map(line =>
+        new Paragraph({
+          children: [new TextRun({ text: line, font: 'Calibri', size: 24 })]
+        })
+      )
+    }]
+  });
+
+  Packer.toBlob(doc).then(blob => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'note.docx';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
 });
 
 function renderNotes() {
