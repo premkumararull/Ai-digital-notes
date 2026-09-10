@@ -1,0 +1,5 @@
+body { font-family: sans-serif; max-width: 500px; margin: auto; padding: 15px; }
+textarea { width: 100%; margin-top: 10px; }
+#preview img { max-width: 100%; margin-top: 10px; }
+button { padding: 8px 14px; margin: 5px 0; }
+#notesList li { border-bottom: 1px solid #ccc; padding: 6px 0; }
