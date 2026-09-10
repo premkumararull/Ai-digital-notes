@@ -3,22 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Handwritten Notes</title>
+<title>NOTES</title>
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h2>Handwriting to Digital Notes</h2>
+<h1>DIGITAL NOTES</h1>
+
 <input type="file" id="imgInput" accept="image/*" capture="environment">
 <div id="preview"></div>
-<button id="scanBtn">Scan</button>
+<button id="scanBtn">SCAN</button>
 <p id="status"></p>
-<textarea id="output" rows="10" placeholder="Extracted text..."></textarea>
-<button id="saveBtn">Save Note</button>
-<h3>Saved Notes</h3>
+
+<textarea id="output" rows="8" placeholder="EXTRACTED TEXT"></textarea>
+
+<div class="row">
+<button id="saveBtn">SAVE</button>
+<button id="exportBtn">EXPORT .DOCX</button>
+</div>
+
+<h2>SAVED</h2>
 <ul id="notesList"></ul>
 
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="https://unpkg.com/docx@8.5.0/build/index.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
